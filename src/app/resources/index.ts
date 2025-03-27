@@ -15,6 +15,7 @@ export {
   home,
   about,
   blog,
+  test,
   work,
   gallery,
 } from "@/app/resources/content";
