@@ -247,8 +247,10 @@ const about = {
           <>
             <img src="/images/icons/Docker.svg" alt="Docker" width="32" height="32" />
             <img src="/images/icons/Git.svg" alt="Git" width="32" height="32" />
-            <img src="/images/icons/Linux.svg" alt="Linux" width="32" height="32" />
+            <img src="/images/icons/Windows_Subsystem_for_Linux_logo.png" alt="wsl" width="32" height="32" />
             <img src="/images/icons/Apache Subversion.svg" alt="Apache Subversion" width="32" height="32" />
+            <img src="/images/icons/Jenkins.svg" alt="Jenkins" width="32" height="32" />
+            <img src="/images/icons/Jira.svg" alt="Jira" width="32" height="32" />
           </>
         ),
       },
