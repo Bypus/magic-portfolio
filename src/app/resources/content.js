@@ -334,24 +334,19 @@ const work = {
   // All projects will be listed on the /home and /work routes
 };
 
-const gallery = {
-  label: "Gallery",
-  title: "My photo gallery",
-  description: `A photo collection by ${person.name}`,
-  images: [],
-};
-
 import imageList from "./gallery.json";
 
 const imagesFolder = "/images/gallery/";
 
-// Charger les images depuis le fichier JSON
-imageList.forEach((image) => {
-  gallery.images.push({
+const gallery = {
+  label: "Gallery",
+  title: "My photo gallery",
+  description: `A photo collection by ${person.name}`,
+  images: imageList.map((image) => ({
     src: `${imagesFolder}${image.file}`,
     alt: image.file,
     orientation: image.orientation,
-  });
-});
+  })),
+};
 
 export { person, social, newsletter, home, about, blog, test, work, gallery };
