@@ -296,20 +296,49 @@ const about = {
       // },
     ],
   },
-  // hobbies: {
-  //   display: true, // set to false to hide this section
-  //   title: "Hobbies",
-  //   institutions: [
-  //     {
-  //       name: "University of Grenoble Alpes - IUT2",
-  //       description: <>Studied software engineering.</>,
-  //     },
-  //     {
-  //       name: "University of Grenoble Alpes - IUT1",
-  //       description: <>Studied web development.</>,
-  //     },
-  //   ],
-  // },
+  hobbies: {
+    display: true, // set to false to hide this section
+    title: "Hobbies",
+    description: "In my free time, I like",
+    activities: [
+      {
+        name: "Discord Bot",
+        description: <>Maintaining a Discord bot to use fun or useful commands on a server.</>,
+        images: [
+          {
+            src: "/images/hobbies/discord_bot.png",
+            alt: "Chaton bot",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+      {
+        name: "Piano - Guitar",
+        description: <>Playing songs I like on my favorite instruments.</>,
+        images: [
+          {
+            src: "/images/hobbies/chat_piano.jpg",
+            alt: "Chat piano",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+      {
+        name: "Video Games",
+        description: <>Playing video games with or without friends.</>,
+        images: [
+          {
+            src: "/images/hobbies/beatring.jpg",
+            alt: "Beat Ring",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+    ],
+  },
 };
 
 const blog = {

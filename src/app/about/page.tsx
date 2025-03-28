@@ -66,6 +66,11 @@ export default function About() {
       display: about.technical.display,
       items: about.technical.skills.map((skill) => skill.title),
     },
+    {
+      title: about.hobbies.title,
+      display: about.hobbies.display,
+      items: about.hobbies.activities.map((activity) => activity.title),
+    },
   ];
   return (
     <Column maxWidth="m">
@@ -301,7 +306,7 @@ export default function About() {
               >
                 {about.technical.title}
               </Heading>
-              <Column fillWidth gap="l">
+              <Column fillWidth gap="l" marginBottom="40">
                 {about.technical.skills.map((skill, index) => (
                   <Column key={`${skill}-${index}`} fillWidth gap="4">
                     <Text variant="heading-strong-l">{skill.title}</Text>
@@ -311,6 +316,57 @@ export default function About() {
                     {skill.images && skill.images.length > 0 && (
                       <Flex fillWidth paddingTop="m" gap="12" wrap>
                         {skill.images.map((image, index) => (
+                          <Flex
+                            key={index}
+                            border="neutral-medium"
+                            radius="m"
+                            //@ts-ignore
+                            minWidth={image.width}
+                            //@ts-ignore
+                            height={image.height}
+                          >
+                            <SmartImage
+                              enlarge
+                              radius="m"
+                              //@ts-ignore
+                              sizes={image.width.toString()}
+                              //@ts-ignore
+                              alt={image.alt}
+                              //@ts-ignore
+                              src={image.src}
+                            />
+                          </Flex>
+                        ))}
+                      </Flex>
+                    )}
+                  </Column>
+                ))}
+              </Column>
+            </>
+          )}
+
+          {about.hobbies.display && (
+            <>
+              <Heading
+                as="h2"
+                id={about.hobbies.title}
+                variant="display-strong-s"
+              >
+                {about.hobbies.title}
+              </Heading>
+              <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
+                      {about.hobbies.description}
+              </Text>
+              <Column fillWidth gap="l">
+                {about.hobbies.activities.map((activity, index) => (
+                  <Column key={`${activity}-${index}`} fillWidth gap="4">
+                    <Text variant="heading-strong-l">{activity.title}</Text>
+                    <Text variant="body-default-m" onBackground="neutral-weak">
+                      {activity.description}
+                    </Text>
+                    {activity.images && activity.images.length > 0 && (
+                      <Flex fillWidth paddingTop="m" gap="12" wrap>
+                        {activity.images.map((image, index) => (
                           <Flex
                             key={index}
                             border="neutral-medium"
