@@ -55,8 +55,8 @@ const home = {
   headline: <>Software developer and builder</>,
   subline: (
     <>
-      I'm Joris, a software developer{/* <InlineCode></InlineCode> */}. I craft helpful products and
-      <br /> user experiences. After hours, I build my own projects.
+      I'm Joris, a passionate software developer dedicated to creating impactful products and seamless user experiences. 
+      <br/>Outside of work, I channel my creativity into building personal projects that push my skills further.
     </>
   ),
 };
@@ -357,6 +357,14 @@ const test = {
   // All posts will be listed on the /blog route
 };
 
+// const game = {
+//   label: "game",
+//   title: "Gaming about design and tech...",
+//   description: `Read what ${person.name} has been gaming recently`,
+//   // Create new blog posts by adding a new .mdx file to app/blog/posts
+//   // All posts will be listed on the /blog route
+// };
+
 const work = {
   label: "Work",
   title: "My projects",
@@ -380,4 +388,4 @@ const gallery = {
   })),
 };
 
-export { person, social, newsletter, home, about, blog, test, work, gallery };
+export { person, social, newsletter, home, about, blog, test,/* game,*/ work, gallery };
