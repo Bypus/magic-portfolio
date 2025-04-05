@@ -195,12 +195,12 @@ const about = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Grenoble Alpes - IUT2",
-        description: <>Studied software engineering.</>,
+        name: "Associate’s Degree in Computer Science",
+        description: <>UGA - France - <strong>Bac +2</strong></>,
       },
       {
-        name: "University of Grenoble Alpes - IUT1",
-        description: <>Studied web development.</>,
+        name: "Bachelor’s Degree in Web Development",
+        description: <>UGA - France - <strong>Bac +3</strong></>,
       },
     ],
   },
