@@ -81,8 +81,8 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Joris is a developer based in Grenoble, with experience in fullstack development and DevOps. 
-        He specializes in modernizing systems, improving user experiences, 
+        Developer based in Grenoble, with experience in fullstack development and DevOps. 
+        Specializes in modernizing systems, improving user experiences, 
         and integrating technology to solve complex challenges efficiently.
       </>
     ),
