@@ -357,13 +357,13 @@ const test = {
   // All posts will be listed on the /blog route
 };
 
-// const game = {
-//   label: "game",
-//   title: "Gaming about design and tech...",
-//   description: `Read what ${person.name} has been gaming recently`,
-//   // Create new blog posts by adding a new .mdx file to app/blog/posts
-//   // All posts will be listed on the /blog route
-// };
+const room = {
+  label: "Room",
+  title: "Rooming about design and tech...",
+  description: `Read what ${person.name} has been rooming recently`,
+  // Create new blog posts by adding a new .mdx file to app/blog/posts
+  // All posts will be listed on the /blog route
+};
 
 const work = {
   label: "Work",
@@ -388,4 +388,4 @@ const gallery = {
   })),
 };
 
-export { person, social, newsletter, home, about, blog, test,/* game,*/ work, gallery };
+export { person, social, newsletter, home, about, blog, test, room, work, gallery };
