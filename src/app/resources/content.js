@@ -23,6 +23,14 @@ const newsletter = {
   ),
 };
 
+const req = require.context(
+  "../../../public/images/icons/plang",
+  false,
+  /\.svg$/
+);
+
+const svgs = req.keys().map((file) => file.replace("./", ""));
+
 const social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
@@ -55,8 +63,8 @@ const home = {
   headline: <>Software developer and builder</>,
   subline: (
     <>
-      I'm Joris, a passionate software developer dedicated to creating impactful products and seamless user experiences. 
-      <br/>Outside of work, I channel my creativity into building personal projects that push my skills further.
+      I'm Joris, a passionate software developer dedicated to creating impactful products and seamless user experiences.
+      <br />Outside of work, I channel my creativity into building personal projects that push my skills further.
     </>
   ),
 };
@@ -81,8 +89,8 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Developer based in Grenoble, with experience in fullstack development and DevOps. 
-        Specializes in modernizing systems, improving user experiences, 
+        Developer based in Grenoble, with experience in fullstack development and DevOps.
+        Specializes in modernizing systems, improving user experiences,
         and integrating technology to solve complex challenges efficiently.
       </>
     ),
@@ -140,7 +148,7 @@ const about = {
             Implementation of a review sorting system.
           </>,
         ],
-        images: [          
+        images: [
           {
             src: "/images/projects/linnea/linnea_score.png",
             alt: "internal scoring tool",
@@ -212,11 +220,15 @@ const about = {
         title: "Programming Languages",
         description: (
           <>
-            <img src="/images/icons/Python.svg" alt="Python" width="32" height="32" /> 
-            <img src="/images/icons/JavaScript.svg" alt="JavaScript" width="32" height="32" /> 
-            <img src="/images/icons/Node.js.svg" alt="Node.js" width="32" height="32" /> 
-            <img src="/images/icons/PHP.svg" alt="PHP" width="32" height="32" /> 
-            <img src="/images/icons/Java.svg" alt="Java" width="32" height="32" /> 
+            {svgs.map((file) => (
+              <img
+                key={file}
+                src={`/images/icons/plang/${file}`}
+                alt={file.replace(".svg", "")}
+                width="32"
+                height="32"
+              />
+            ))}
           </>
         ),
       },
