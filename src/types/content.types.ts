@@ -27,6 +27,11 @@ export type Person = {
   location: IANATimeZone;
   /** Languages spoken */
   languages?: string[];
+  /** Technologies known */
+  technologies?: Array<{
+    category: string;
+    items: Array<{ name: string; icon: string }>;
+  }>;
 };
 
 /**
@@ -150,6 +155,11 @@ export interface About extends BasePageConfig {
       timeframe: string;
       /** Role or job title */
       role: string;
+            /** Skill tags */
+      tags?: Array<{
+        name: string;
+        icon?: string;
+      }>;
       /** Achievements at the company */
       achievements: React.ReactNode[];
       /** Images related to the experience */
@@ -238,3 +248,9 @@ export interface Gallery extends BasePageConfig {
     orientation: string;
   }>;
 }
+
+/**
+ * Room page configuration.
+ * @description Configuration for the Room page, including metadata and navigation label.
+ */
+export interface Room extends BasePageConfig {}

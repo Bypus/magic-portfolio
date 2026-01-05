@@ -107,6 +107,36 @@ export default function About() {
                 ))}
               </Row>
             )}
+            {person.technologies && person.technologies.length > 0 && (
+              <Column gap="20" fillWidth marginTop="m">
+                <Text variant="heading-strong-l">
+                  Technologies
+                </Text>
+                <Column gap="20">
+                  {person.technologies.map((category, categoryIndex) => (
+                    <Column key={categoryIndex} gap="12">
+                      <Text variant="heading-strong-s">
+                        {category.category}
+                      </Text>
+                      <Row wrap gap="12">
+                        {category.items.map((tech, techIndex) => (
+                          <Column key={techIndex} gap="4" horizontal="center" minWidth="48">
+                            <img
+                              src={tech.icon}
+                              alt={tech.name}
+                              style={{ width: "32px", height: "32px", objectFit: "contain" }}
+                            />
+                            <Text variant="body-default-xs" align="center">
+                              {tech.name}
+                            </Text>
+                          </Column>
+                        ))}
+                      </Row>
+                    </Column>
+                  ))}
+                </Column>
+              </Column>
+            )}
           </Column>
         )}
         <Column className={styles.blockAlign} flex={9} maxWidth={40}>
@@ -221,6 +251,15 @@ export default function About() {
                     <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
                       {experience.role}
                     </Text>
+                    {experience.tags && experience.tags.length > 0 && (
+                      <Row wrap gap="8" paddingTop="8">
+                        {experience.tags.map((tag, tagIndex) => (
+                          <Tag key={`${experience.company}-${tagIndex}`} size="l" prefixIcon={tag.icon}>
+                            {tag.name}
+                          </Tag>
+                        ))}
+                      </Row>
+                    )}
                     <Column as="ul" gap="16">
                       {experience.achievements.map(
                         (achievement: React.ReactNode, index: number) => (

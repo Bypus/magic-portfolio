@@ -1,19 +1,69 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work, Room } from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
+  firstName: "Joris",
+  lastName: "Stocker",
+  name: `Joris Stocker`,
+  role: "Fullstack Developer",
   avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  email: "joris.stocker@gmail.com",
+  location: "Europe/Paris", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["French", "English"], // optional: Leave the array empty if you don't want to display languages
+  technologies: [
+    {
+      category: "Programming Languages",
+      items: [
+        { name: "JavaScript", icon: "/images/icons/plang/JavaScript.svg" },
+        { name: "Python", icon: "/images/icons/plang/Python.svg" },
+        { name: "PHP", icon: "/images/icons/plang/PHP.svg" },
+        { name: "Java", icon: "/images/icons/plang/Java.svg" },
+      ],
+    },
+    {
+      category: "Frameworks & Libraries",
+      items: [
+        { name: "React", icon: "/images/icons/React.svg" },
+        { name: "Symfony", icon: "/images/icons/Symfony.svg" },
+        { name: "Node.js", icon: "/images/icons/plang/Node.js.svg" },
+      ],
+    },
+    {
+      category: "Databases",
+      items: [
+        { name: "MySQL", icon: "/images/icons/MySQL.svg" },
+        { name: "PostgreSQL", icon: "/images/icons/PostgresSQL.svg" },
+      ],
+    },
+    {
+      category: "DevOps & Tools",
+      items: [
+        { name: "Docker", icon: "/images/icons/Docker.svg" },
+        { name: "Git", icon: "/images/icons/Git.svg" },
+        { name: "Jenkins", icon: "/images/icons/Jenkins.svg" },
+        { name: "Jira", icon: "/images/icons/Jira.svg" },
+        { name: "VS Code", icon: "/images/icons/VSCode.svg" },
+      ],
+    },
+    {
+      category: "Operating Systems",
+      items: [
+        { name: "Linux", icon: "/images/icons/Linux.svg" },
+        { name: "Windows", icon: "/images/icons/Windows11.svg" },
+      ],
+    },
+    {
+      category: "Web Technologies",
+      items: [
+        { name: "HTML5", icon: "/images/icons/HTML5.svg" },
+        { name: "CSS3", icon: "/images/icons/CSS3.svg" },
+      ],
+    },
+  ],
 };
 
 const newsletter: Newsletter = {
-  display: true,
+  display: false,
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
   description: <>My weekly newsletter about creativity and engineering</>,
 };
@@ -25,27 +75,27 @@ const social: Social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system",
+    link: "https://github.com/Bypus/",
     essential: true,
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/joris-stocker-a21328b2/",
     essential: true,
   },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
-    essential: true,
-  },
+  // {
+  //   name: "Instagram",
+  //   icon: "instagram",
+  //   link: "https://www.instagram.com/once_ui/",
+  //   essential: false,
+  // },
+  // {
+  //   name: "Threads",
+  //   icon: "threads",
+  //   link: "https://www.threads.com/@once_ui",
+  //   essential: true,
+  // },
   {
     name: "Email",
     icon: "email",
@@ -60,24 +110,28 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  headline: <>Software developer and builder</>,
   featured: {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">Banko Perso</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
           Featured work
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "/work/building-banko-perso",
   },
   subline: (
     <>
-    I'm Selene, a design engineer at <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
-</>
+      I'm Joris, a passionate software developer dedicated to creating impactful
+      products and seamless user experiences.
+      <br />
+      Outside of work, I channel my creativity into building personal projects
+      that push my skills further.
+    </>
   ),
 };
 
@@ -94,7 +148,7 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false,
     link: "https://cal.com",
   },
   intro: {
@@ -102,9 +156,10 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Developer based in Grenoble, with experience in fullstack development
+        and DevOps. Specializes in modernizing systems, improving user
+        experiences, and integrating technology to solve complex challenges
+        efficiently.
       </>
     ),
   },
@@ -113,44 +168,146 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Topela",
+        timeframe: "2024 - 2025",
+        role: "Fullstack Developer",
+        tags: [
+          {
+            name: "PHP",
+            icon: "php",
+          },
+          {
+            name: "GCP",
+            icon: "googlecloud",
+          },
+          {
+            name: "Symfony",
+            icon: "symfony",
+          },
+          {
+            name: "Node.js",
+            icon: "nodedotjs",
+          },
+        ],
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Complete modernization of a <strong>Symfony</strong> 3 application
+            to version 7 with migration from <strong>PHP</strong> 7 to 8.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Front-end upgrade: integration of SCSS, Twig, and a build system
+            based on <strong>Node.js</strong> (Gulp).
+          </>,
+          <>Replacement of the payment module.</>,
+          <>Improvement of user session management.</>,
+          <>
+            Redesign of the architecture: updating dependencies, strengthening
+            security, and improving maintainability.
+          </>,
+          <>
+            Deployment and containerization with <strong>Docker</strong> and{" "}
+            <strong>Google App Engine</strong>.
           </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
+            src: "/images/projects/topela/tope-la.png",
+            alt: "tope-la front page",
             width: 16,
             height: 9,
           },
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Linnea",
+        timeframe: "2023 - 2024",
+        role: "Fullstack Developer",
+        tags: [
+          {
+            name: "PHP",
+            icon: "php",
+          },
+        ],
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Creation of a product sheet evaluation module in Front/Back within
+            an internal <strong>PHP</strong> framework.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Practice of <strong>CI/CD</strong> in a team.
+          </>,
+          <>Implementation of a review sorting system.</>,
+        ],
+        images: [
+          {
+            src: "/images/projects/linnea/linnea_score.png",
+            alt: "internal scoring tool",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/linnea/linnea_review.png",
+            alt: "external review tool",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+      {
+        company: "Keolabs",
+        timeframe: "2017 - 2023",
+        role: "DevOps Manager",
+        tags: [
+          {
+            name: "Python",
+            icon: "python",
+          },
+          {
+            name: "Jenkins",
+            icon: "jenkins",
+          },
+          {
+            name: "Scrum",
+            icon: "scrum",
+          },
+        ],
+        achievements: [
+          <>
+            Maintenance and improvement of calibration and quality validation
+            test suites using <strong>Python</strong> and <strong>C#</strong>.
+          </>,
+          <>
+            Unification of two package build systems (<strong>Python</strong>,{" "}
+            <strong>Perl</strong>, <strong>C++</strong>) through pair
+            programming and mob programming.
+          </>,
+          <>
+            Implementation of <strong>CI/CD</strong> pipelines with{" "}
+            <strong>Jenkins</strong> and <strong>Ansible</strong>, managing a
+            virtual machine system.
+          </>,
+          <>
+            Development and maintenance of <strong>Python</strong> libraries for
+            test instrument control (oscilloscopes, signal generators...), with{" "}
+            <strong>unit testing</strong>.
+          </>,
+          <>
+            Optimization of tests by integrating new standards and improving
+            databases with <strong>Django</strong>.
+          </>,
+          <>
+            Refactoring and optimizing internal <strong>Python</strong> scripts.
           </>,
         ],
-        images: [],
+        images: [
+          {
+            src: "/images/projects/keolabs/keolabs_spy.jpg",
+            alt: "external review tool",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
     ],
   },
@@ -159,12 +316,20 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "Associate’s Degree in Computer Science",
+        description: (
+          <>
+            UGA - France - <strong>Bac +2</strong>
+          </>
+        ),
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Bachelor’s Degree in Web Development",
+        description: (
+          <>
+            UGA - France - <strong>Bac +3</strong>
+          </>
+        ),
       },
     ],
   },
@@ -177,22 +342,22 @@ const about: About = {
         description: (
           <>Able to prototype in Figma with Once UI with unnatural speed.</>
         ),
-        tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
+        // tags: [
+        //   {
+        //     name: "Figma",
+        //     icon: "figma",
+        //   },
+        // ],
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            src: "/images/projects/project-01/cover-02.jpg",
+            src: "/images/projects/project-01/cover-01.jpg",
             alt: "Project image",
             width: 16,
             height: 9,
           },
           {
-            src: "/images/projects/project-01/cover-03.jpg",
+            src: "/images/projects/project-01/cover-02.jpg",
             alt: "Project image",
             width: 16,
             height: 9,
@@ -202,7 +367,7 @@ const about: About = {
       {
         title: "Next.js",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>Building next gen apps with Next.js.</>
         ),
         tags: [
           {
@@ -212,10 +377,6 @@ const about: About = {
           {
             name: "Next.js",
             icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
           },
         ],
         // optional: leave the array empty if you don't want to display images
@@ -250,55 +411,32 @@ const work: Work = {
   // All projects will be listed on the /home and /work routes
 };
 
+import imageList from "./gallery.json";
+const imagesFolder = "/images/gallery/";
+
 const gallery: Gallery = {
   path: "/gallery",
   label: "Gallery",
   title: `Photo gallery – ${person.name}`,
   description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
-  images: [
-    {
-      src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-  ],
+  images: imageList.map((image) => ({
+    src: `${imagesFolder}${image.file}`,
+    alt: image.file,
+    orientation: image.orientation,
+  })),
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+const room: Room = {
+  path: "/room",
+  label: "Room",
+  title: "Rooming about design and tech...",
+  description: `Read what ${person.name} has been rooming recently`,
+};
+
+// const game: Game = {
+//   label: "Game",
+//   title: "Gaming about design and tech...",
+//   description: `Read what ${person.name} has been gaming recently`,
+// };
+
+export { person, social, newsletter, home, about, blog, work, gallery, room };

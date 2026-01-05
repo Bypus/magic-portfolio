@@ -1,0 +1,69 @@
+---
+title: "Automating API & Test Bench Validation for Measurement Systems"
+publishedAt: "2023-06-01"
+summary: "Automation of API unit tests and GUI validation for a measurement test bench, ensuring reliability, repeatability, and faster validation cycles."
+images:
+  - "/images/projects/keolabs/keolabs_spy.jpg"
+team:
+  - name: "Keolabs Software"
+    role: "DevOps Technician"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/company/keolabs/"
+---
+
+## Overview
+
+This project focused on automating the validation of a test bench developed by **Keolabs**, used to control and validate various **measurement instruments** such as oscilloscopes and proprietary internal tools.
+
+The main objective was to **increase test reliability, reduce manual intervention**, and ensure consistent validation of both the **API layer** and the **graphical user interface (GUI)** of the test bench.
+
+By combining virtualized environments, automated unit tests, and GUI testing, this solution significantly improved the robustness and maintainability of the validation process.
+
+## Key Features
+
+- **API Unit Test Automation**  
+  Designed and implemented automated unit tests for the Keolabs API responsible for piloting measurement instruments (oscilloscopes and proprietary tools). These tests validate command execution, data integrity, and error handling.
+
+- **GUI Test Automation for Test Bench**  
+  Automated end-to-end GUI tests of the test bench using Ranorex, ensuring that user interactions, workflows, and visual components behave as expected in real operating conditions.
+
+- **Virtualized Test Environments**  
+  Used VirtualBox to create isolated and reproducible test environments, allowing reliable execution of automated tests without impacting physical systems.
+
+- **Continuous Integration**  
+  Integrated the test suite into a Jenkins CI pipeline, enabling automatic execution of API and GUI tests on each update, with clear reporting and traceability through Git.
+
+## Technologies Used
+
+- **Python**:  
+  For implementing API unit tests and test logic, focusing on clarity, modularity, and maintainability.
+
+- **Ranorex**:  
+  For GUI test automation of the test bench, simulating real user interactions and validating complex workflows.
+
+- **VirtualBox**:  
+  To host virtualized environments for consistent and repeatable test execution.
+
+- **Git**:  
+  For version control of test scripts and automation configurations.
+
+- **Jenkins**:  
+  For continuous integration, automated test execution, and reporting.
+
+## Challenges and Learnings
+
+One of the main challenges was ensuring reliable GUI automation in a test bench context, where timing, hardware interaction, and external dependencies can introduce instability. This required careful synchronization, robust selectors, and defensive test design.
+
+Another key challenge was maintaining a clean separation between **API-level tests** and **GUI-level tests**, ensuring that failures could be diagnosed quickly and accurately.
+
+This project strengthened my expertise in **test automation architecture**, CI pipelines, and the validation of systems that interface with both software and hardware components.
+
+## Outcome
+
+The automated testing solution significantly reduced manual validation time and improved test coverage for both the API and the GUI of the test bench. Test execution became more consistent, repeatable, and easier to maintain over time.
+
+This project demonstrates the value of automation in **industrial and measurement-oriented environments**, where reliability and precision are critical.
+
+---
+
+This project highlights strong skills in test automation, CI/CD integration, and validation of complex systems combining APIs, GUIs, and hardware control.
