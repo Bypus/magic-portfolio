@@ -81,9 +81,6 @@ export default function About() {
         {about.avatar.display && (
           <Column
             className={styles.avatar}
-            top="64"
-            fitHeight
-            position="sticky"
             s={{ position: "relative", style: { top: "auto" } }}
             xs={{ style: { top: "auto" } }}
             minWidth="160"
@@ -108,7 +105,19 @@ export default function About() {
               </Row>
             )}
             {person.technologies && person.technologies.length > 0 && (
-              <Column gap="20" fillWidth marginTop="m">
+              <Column 
+                gap="20" 
+                fillWidth 
+                marginTop="m"
+                position="sticky"
+                top="64"
+                style={{ 
+                  maxHeight: "calc(100vh - 128px)",
+                  overflowY: "auto",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                }}
+              >
                 <Text variant="heading-strong-l">
                   Technologies
                 </Text>
@@ -124,6 +133,7 @@ export default function About() {
                             <img
                               src={tech.icon}
                               alt={tech.name}
+                              className={tech.name === "Symfony" ? "tech-icon-symfony" : "tech-icon"}
                               style={{ width: "32px", height: "32px", objectFit: "contain" }}
                             />
                             <Text variant="body-default-xs" align="center">

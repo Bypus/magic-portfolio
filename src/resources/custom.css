@@ -52,3 +52,8 @@
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+
+/* Invert Symfony icon in dark theme for better visibility */
+[data-theme="dark"] .tech-icon-symfony {
+  filter: invert(1) hue-rotate(180deg);
+}
