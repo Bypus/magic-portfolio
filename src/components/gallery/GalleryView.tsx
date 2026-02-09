@@ -11,7 +11,7 @@ export default function GalleryView() {
           enlarge
           priority={index < 10}
           sizes="(max-width: 560px) 100vw, 50vw"
-          key={index}
+          key={image.src}
           radius="m"
           aspectRatio={image.orientation === "horizontal" ? "16 / 9" : "3 / 4"}
           src={image.src}
