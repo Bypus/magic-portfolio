@@ -21,6 +21,7 @@ import {
   PiBookBookmarkDuotone,
   PiImageDuotone,
   PiCube,
+  PiPlugs,
 } from "react-icons/pi";
 
 import {
@@ -32,6 +33,10 @@ import {
   SiMysql,
   SiSymfony,
   SiPython,
+  SiTypescript,
+  SiCplusplus,
+  SiReact,
+  SiRust,
   SiGooglecloud,
   SiNodedotjs,
   SiJenkins,
@@ -39,6 +44,7 @@ import {
 } from "react-icons/si";
 
 import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
+import { types } from "util";
 
 export const iconLibrary: Record<string, IconType> = {
   arrowUpRight: HiArrowUpRight,
@@ -72,6 +78,10 @@ export const iconLibrary: Record<string, IconType> = {
   mysql: SiMysql,
   symfony: SiSymfony,
   python: SiPython,
+  cpp: SiCplusplus,
+  typescript: SiTypescript,
+  react: SiReact,
+  rust: SiRust,
   googlecloud: SiGooglecloud,
   nodedotjs: SiNodedotjs,
   jenkins: SiJenkins,

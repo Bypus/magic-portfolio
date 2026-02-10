@@ -102,6 +102,12 @@ const social: Social = [
     link: `mailto:${person.email}`,
     essential: true,
   },
+  {
+    name: "_akwa_",
+    icon: "discord",
+    link: "https://discord.com/channels/@me",
+    essential: true,
+  },
 ];
 
 const home: Home = {
@@ -309,6 +315,52 @@ const about: About = {
           },
         ],
       },
+      {
+        company: "Projets personnels",
+        timeframe: "2017 - 2023",
+        role: "Developer",
+        tags: [
+          {
+            name: "Python",
+            icon: "python",
+          },
+          {
+            name: "TypeScript",
+            icon: "typescript",
+          },
+          {
+            name: "C++",
+            icon: "cpp",
+          },
+          {
+            name: "React",
+            icon: "react",
+          },
+          {
+            name: "Rust",
+            icon: "rust",
+          },
+          {
+            name: "APIs",
+            icon: "plugs",
+          },
+        ],
+        achievements: [
+          <>
+            Self-hosted personal banking web app with <strong>React</strong> frontend{" "}
+            and <strong>Node.js/Express</strong> backend.
+          </>,
+          <>
+            Discord bot for a friends group with various API-powered fun commands.
+          </>,
+          <>
+            French fork of Tune Perfect, a modern karaoke game platform.
+          </>,
+          <>
+            And more on <a href="https://github.com/Bypus">my GitHub</a>!
+          </>
+        ],
+      },
     ],
   },
   studies: {
@@ -334,7 +386,7 @@ const about: About = {
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
+    display: false, // set to false to hide this section
     title: "Technical skills",
     skills: [
       {
