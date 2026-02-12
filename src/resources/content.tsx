@@ -5,7 +5,7 @@ const person: Person = {
   firstName: "Joris",
   lastName: "Stocker",
   name: `Joris Stocker`,
-  role: "Fullstack Developer",
+  role: "Full Stack Developer",
   avatar: "/images/avatar.jpg",
   email: "joris.stocker@gmail.com",
   location: "Europe/Paris", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
@@ -162,7 +162,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Developer based in Grenoble, with experience in fullstack development
+        Developer based in Grenoble, with experience in full stack development
         and DevOps. Specializes in modernizing systems, improving user
         experiences, and integrating technology to solve complex challenges
         efficiently.
@@ -176,7 +176,7 @@ const about: About = {
       {
         company: "Topela",
         timeframe: "2024 - 2025",
-        role: "Fullstack Developer",
+        role: "Full Stack Developer",
         tags: [
           {
             name: "PHP",
@@ -228,7 +228,7 @@ const about: About = {
       {
         company: "Linnea",
         timeframe: "2023 - 2024",
-        role: "Fullstack Developer",
+        role: "Full Stack Developer",
         tags: [
           {
             name: "PHP",

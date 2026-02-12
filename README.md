@@ -1,12 +1,12 @@
 # Joris Stocker - Portfolio
 
-Hey! I'm Joris, a Fullstack Developer based in Grenoble. This is my portfolio built with Next.js and Once UI.
+Hey! I'm Joris, a Developer based in Grenoble. This is my portfolio built with Next.js and Once UI.
 
 ![Portfolio Preview](public/images/og/home.jpg)
 
 ## What's Inside
 
-This portfolio showcases my work as a fullstack developer, featuring:
+This portfolio showcases my work as a developer, featuring:
 
 - **Work Projects**: Case studies of projects I've built
 - **Blog**: Technical posts about development, components, and best practices
