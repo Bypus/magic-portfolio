@@ -9,6 +9,7 @@ import {
   SmartLink,
   Text,
 } from "@once-ui-system/core";
+import { slugify as transliterate } from "transliteration";
 
 interface ProjectCardProps {
   href: string;
@@ -30,8 +31,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   avatars,
   link,
 }) => {
+  const slugify = (str: string): string => {
+    const strWithAnd = str.replace(/&/g, " and ");
+    return transliterate(strWithAnd, {
+      lowercase: true,
+      separator: "-",
+    }).replace(/\-\-+/g, "-");
+  };
+
   return (
-    <Column fillWidth gap="m">
+    <Column id={slugify(title)} fillWidth gap="m">
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
         items={images.map((image) => ({

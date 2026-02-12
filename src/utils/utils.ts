@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
 
 type Team = {
@@ -71,4 +71,19 @@ function getMDXData(dir: string) {
 export function getPosts(customPath = ["", "", "", ""]) {
   const postsDir = path.join(process.cwd(), ...customPath);
   return getMDXData(postsDir);
+}
+
+export function extractHeadings(content: string) {
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+  const headings: { title: string; level: number }[] = [];
+  let match: RegExpExecArray | null = headingRegex.exec(content);
+
+  while (match !== null) {
+    const level = match[1].length;
+    const title = match[2].trim();
+    headings.push({ title, level });
+    match = headingRegex.exec(content);
+  }
+
+  return headings;
 }
