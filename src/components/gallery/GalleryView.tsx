@@ -4,6 +4,10 @@ import { Media, MasonryGrid } from "@once-ui-system/core";
 import { gallery } from "@/resources";
 
 export default function GalleryView() {
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <MasonryGrid columns={2} s={{ columns: 1 }}>
       {gallery.images.map((image, index) => (
@@ -16,6 +20,13 @@ export default function GalleryView() {
           aspectRatio={image.orientation === "horizontal" ? "16 / 9" : "3 / 4"}
           src={image.src}
           alt={image.alt}
+          onContextMenu={handleContextMenu}
+          style={{
+            userSelect: "none",
+            pointerEvents: "auto",
+            WebkitUserSelect: "none",
+            WebkitTouchCallout: "none",
+          }}
         />
       ))}
     </MasonryGrid>
