@@ -218,7 +218,7 @@ const about: About = {
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/topela/tope-la.png",
+            src: "/images/projects/topela/tope-la.jpg",
             alt: "tope-la front page",
             width: 16,
             height: 9,
@@ -247,13 +247,13 @@ const about: About = {
         ],
         images: [
           {
-            src: "/images/projects/linnea/linnea_score.png",
+            src: "/images/projects/linnea/linnea_score.jpg",
             alt: "internal scoring tool",
             width: 16,
             height: 9,
           },
           {
-            src: "/images/projects/linnea/linnea_review.png",
+            src: "/images/projects/linnea/linnea_review.jpg",
             alt: "external review tool",
             width: 16,
             height: 9,
