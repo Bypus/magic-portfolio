@@ -23,6 +23,7 @@ const routes: RoutesConfig = {
   "/blog": false,
   "/gallery": true,
   "/room": true,
+  "/open-app": true,
 };
 
 const display: DisplayConfig = {

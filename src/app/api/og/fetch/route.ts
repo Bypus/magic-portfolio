@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { isSafeUrl } from '@/utils/urlSafety';
 
 export const runtime = 'edge';
 
@@ -71,6 +72,10 @@ export async function GET(request: Request) {
 
   if (!url) {
     return NextResponse.json({ error: 'URL is required' }, { status: 400 });
+  }
+
+  if (!isSafeUrl(url)) {
+    return NextResponse.json({ error: 'URL not allowed' }, { status: 403 });
   }
 
   try {

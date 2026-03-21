@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { isSafeUrl } from '@/utils/urlSafety';
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,6 +9,10 @@ export async function GET(request: NextRequest) {
     
     if (!imageUrl) {
       return NextResponse.json({ error: 'Missing URL parameter' }, { status: 400 });
+    }
+
+    if (!isSafeUrl(imageUrl)) {
+      return NextResponse.json({ error: 'URL not allowed' }, { status: 403 });
     }
     
     // Fetch the image
