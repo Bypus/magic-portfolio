@@ -1,0 +1,286 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: sans-serif;
+}
+
+#c {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; height: 100%;
+}
+
+/* ── Modal ── */
+
+#song-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+#song-modal.hidden {
+  display: none;
+}
+
+#modal-box {
+  background: rgba(15, 15, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 28px 24px 20px;
+  width: min(400px, 88vw);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#modal-box h2 {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: 0.03em;
+}
+
+#song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.song-opt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  text-align: left;
+}
+
+.song-opt:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 210, 60, 0.4);
+}
+
+.song-opt-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.song-opt-artist {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+}
+
+/* ── Player ── */
+
+#player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: min(320px, 80vw);
+  background: rgba(0, 0, 0, 0.30);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 14px 18px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+  transition: border-color 1.5s ease;
+}
+
+/* Le player se teinte au coucher de soleil via une variable CSS mise à jour par main.js */
+#player.sunset {
+  border-color: rgba(255, 140, 60, 0.35);
+  background: rgba(20, 8, 30, 0.38);
+}
+
+#player-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+#song-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+#song-title {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#song-artist {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#time-display {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Barre de progression / thème ── */
+
+#progress-track {
+  position: relative;
+  height: 20px;
+  background: transparent;
+  overflow: visible;
+  cursor: pointer;
+  margin: -4px 0 4px;
+}
+
+#progress-track::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+#progress-track:active { cursor: grabbing; }
+
+#progress-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 3px;
+  transform: translateY(-50%);
+  width: 0%;
+  border-radius: 2px;
+  background: var(--bar-color, rgb(255, 210, 60));
+  transition: width 0.25s linear, background 0.5s ease;
+}
+
+/* Petit soleil qui glisse sur la barre */
+#progress-sun {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffe066;
+  box-shadow: 0 0 6px 2px rgba(255, 200, 60, 0.55);
+  pointer-events: none;
+  transition: left 0.25s linear, background 1.5s ease, box-shadow 1.5s ease, transform 0.15s ease;
+}
+
+#progress-track:hover #progress-sun {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#progress-sun.sunset {
+  background: #ff7020;
+  box-shadow: 0 0 8px 3px rgba(255, 80, 10, 0.6);
+}
+
+/* ── Contrôles ── */
+
+#player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  position: relative;
+}
+
+#btn-mute {
+  position: absolute;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.10);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#btn-mute:hover { background: rgba(255, 255, 255, 0.22); }
+
+#btn-mute svg {
+  width: 14px; height: 14px;
+}
+
+#btn-play {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.10);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#btn-play:hover:not(:disabled) { background: rgba(255, 255, 255, 0.22); }
+#btn-play:disabled { opacity: 0.35; cursor: default; }
+
+#btn-play svg {
+  width: 14px; height: 14px;
+  fill: rgba(255, 255, 255, 0.90);
+}
+
+#icon-play {
+  margin-left: 2px;
+}
+
+/* ── Status ── */
+
+#status {
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 10px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  min-height: 13px;
+}
