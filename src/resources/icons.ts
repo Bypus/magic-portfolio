@@ -24,6 +24,7 @@ import {
   PiPlugs,
 } from "react-icons/pi";
 
+
 import {
   SiJavascript,
   SiNextdotjs,
@@ -44,9 +45,8 @@ import {
 } from "react-icons/si";
 
 import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
-import { types } from "util";
 
-export const iconLibrary: Record<string, IconType> = {
+export const iconLibrary = {
   arrowUpRight: HiArrowUpRight,
   arrowRight: HiArrowRight,
   email: HiEnvelope,
@@ -59,6 +59,7 @@ export const iconLibrary: Record<string, IconType> = {
   home: PiHouseDuotone,
   gallery: PiImageDuotone,
   room: PiCube,
+  plugs: PiPlugs,
   discord: FaDiscord,
   eye: HiOutlineEye,
   eyeOff: HiOutlineEyeSlash,
@@ -92,7 +93,13 @@ export const iconLibrary: Record<string, IconType> = {
   reddit: FaReddit,
   telegram: FaTelegram,
   instagram: FaInstagram,
-};
+} satisfies Record<string, IconType>;
 
 export type IconLibrary = typeof iconLibrary;
 export type IconName = keyof IconLibrary;
+
+// Registers the names above with Once UI, so `<Icon name>` and every `icon`
+// prop accept them and a typo is a type error.
+declare module "@once-ui-system/core" {
+  interface IconLibraryOverrides extends Record<IconName, true> {}
+}

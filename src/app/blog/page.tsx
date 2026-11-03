@@ -1,16 +1,18 @@
 import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
-import { Mailchimp } from "@/components";
+import { Newsletter } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL, blog, person, newsletter } from "@/resources";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  const metadata = Meta.generate({
     title: blog.title,
     description: blog.description,
     baseURL: baseURL,
     image: `/api/og/generate?title=${encodeURIComponent(blog.title)}`,
     path: blog.path,
   });
+  // Meta.generate writes a canonical only alongside language alternates.
+  return { ...metadata, alternates: { canonical: metadata.openGraph.url } };
 }
 
 export default function Blog() {
@@ -32,10 +34,10 @@ export default function Blog() {
       <Heading marginBottom="l" variant="heading-strong-xl" marginLeft="24">
         {blog.title}
       </Heading>
-      <Column fillWidth flex={1} gap="40">
+      <Column fillWidth flex={1} gap="40" s={{ gap: "24" }}>
         <Posts range={[1, 1]} thumbnail />
         <Posts range={[2, 3]} columns="2" thumbnail direction="column" />
-        <Mailchimp marginBottom="l" />
+        <Newsletter marginBottom="l" />
         <Heading as="h2" variant="heading-strong-xl" marginLeft="l">
           Earlier posts
         </Heading>

@@ -10,6 +10,7 @@ const person: Person = {
   email: "joris.stocker@gmail.com",
   location: "Europe/Paris", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["French", "English"], // optional: Leave the array empty if you don't want to display languages
+  locale: "en",
   technologies: [
     {
       category: "Programming Languages",
