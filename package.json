@@ -13,6 +13,8 @@
     "@mdx-js/loader": "^3.1.0",
     "@next/mdx": "^16.0.10",
     "@once-ui-system/core": "^2.1.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
     "classnames": "^2.5.1",
     "cookie": "^1.0.2",
     "gray-matter": "^4.0.3",
@@ -27,9 +29,8 @@
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "sass": "^1.86.3",
-    "transliteration": "^2.3.5",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.4.2"
+    "three": "0.182.0",
+    "transliteration": "^2.3.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -37,10 +38,10 @@
     "@types/node": "^20.17.30",
     "@types/react": "^19.2.4",
     "@types/react-dom": "^19.2.3",
+    "baseline-browser-mapping": "^2.9.19",
     "eslint": "^9.25.0",
     "typescript": "^5.8.3",
-    "tzdata": "^1.0.44",
-    "baseline-browser-mapping": "^2.9.19"
+    "tzdata": "^1.0.44"
   },
   "engines": {
     "node": ">=20.9.0"

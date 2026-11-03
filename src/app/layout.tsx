@@ -44,6 +44,7 @@ export default async function RootLayout({
     <Flex
       suppressHydrationWarning
       as="html"
+      data-scroll-behavior="smooth"
       lang={person.locale ?? "en"}
       fillWidth
       className={classNames(
