@@ -1,19 +1,32 @@
 import { ImageResponse } from "next/og";
 import { baseURL, person } from "@/resources";
+import { guardApiRequest } from "@/utils/apiSecurity";
+import { RateLimiter } from "@/utils/rateLimit";
 
 export const runtime = "nodejs";
+const limiter = new RateLimiter(30, 60_000);
 
 export async function GET(request: Request) {
-  let url = new URL(request.url);
-  let title = url.searchParams.get("title") || "Portfolio";
+  // Social crawlers and image previews must be able to request this public image.
+  const denied = guardApiRequest(request, limiter, false);
+  if (denied) return denied;
+  const url = new URL(request.url);
+  const title = url.searchParams.get("title") || "Portfolio";
+  if (title.length > 200) {
+    return Response.json({ error: "Title too long" }, { status: 400, headers: { "Cache-Control": "no-store" } });
+  }
 
   async function loadGoogleFont(font: string) {
     const url = `https://fonts.googleapis.com/css2?family=${font}`;
-    const css = await (await fetch(url)).text();
+    const css = await (await fetch(url, { signal: AbortSignal.timeout(5000), next: { revalidate: 86400 } })).text();
     const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/);
 
     if (resource) {
-      const response = await fetch(resource[1]);
+      const resourceUrl = new URL(resource[1]);
+      if (resourceUrl.protocol !== "https:" || resourceUrl.hostname !== "fonts.gstatic.com") {
+        throw new Error("Unexpected font source");
+      }
+      const response = await fetch(resourceUrl, { signal: AbortSignal.timeout(5000), redirect: "error", next: { revalidate: 86400 } });
       if (response.status == 200) {
         return await response.arrayBuffer();
       }

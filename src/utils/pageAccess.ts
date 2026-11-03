@@ -1,4 +1,6 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
+import { RateLimiter } from "./rateLimit";
+export { clientKey } from "./rateLimit";
 
 /**
  * Server-side access for the routes in `protectedRoutes`
@@ -19,12 +21,13 @@ export const PAGE_ACCESS_MAX_AGE = 60 * 60; // seconds
 
 function signingKey(): Buffer | null {
   const secret = process.env.PAGE_ACCESS_SECRET;
-  if (secret) return createHash("sha256").update(secret).digest();
   const password = process.env.PAGE_ACCESS_PASSWORD;
-  if (password) {
-    return createHash("sha256").update(`magic-portfolio:page-access:${password}`).digest();
-  }
-  return null;
+  if (!password) return null;
+  // Bind the signature to the password even when a separate secret is used,
+  // so password rotation revokes previously issued cookies.
+  return createHash("sha256")
+    .update(JSON.stringify(["magic-portfolio:page-access:v2", secret ?? "", password]))
+    .digest();
 }
 
 function sign(key: Buffer, payload: string): string {
@@ -59,7 +62,8 @@ export function isValidAccessToken(token: string | undefined | null, now = Date.
   if (!key || !token) return false;
   const [expires, signature, ...rest] = token.split(".");
   if (rest.length || !expires || !signature || !/^\d{1,12}$/.test(expires)) return false;
-  if (Number(expires) <= Math.floor(now / 1000)) return false;
+  const seconds = Math.floor(now / 1000);
+  if (Number(expires) <= seconds || Number(expires) > seconds + PAGE_ACCESS_MAX_AGE) return false;
   return safeEqual(signature, sign(key, expires));
 }
 
@@ -90,27 +94,13 @@ export function isProtectedPath(
 // down rather than capping it exactly.
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_ATTEMPTS = 10;
-const attempts = new Map<string, { count: number; resetAt: number }>();
-
-export function clientKey(headers: Headers): string {
-  const forwarded = headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  return forwarded || headers.get("x-real-ip") || "unknown";
-}
+const attempts = new RateLimiter(MAX_ATTEMPTS, WINDOW_MS);
 
 /** Counts one attempt for `key`. Returns the seconds to wait when over the limit, else 0. */
 export function takeAttempt(key: string, now = Date.now()): number {
-  if (attempts.size > 10_000) {
-    for (const [k, v] of attempts) if (v.resetAt <= now) attempts.delete(k);
-  }
-  const entry = attempts.get(key);
-  if (!entry || entry.resetAt <= now) {
-    attempts.set(key, { count: 1, resetAt: now + WINDOW_MS });
-    return 0;
-  }
-  entry.count += 1;
-  return entry.count > MAX_ATTEMPTS ? Math.ceil((entry.resetAt - now) / 1000) : 0;
+  return attempts.take(key, now);
 }
 
 export function clearAttempts(key: string): void {
-  attempts.delete(key);
+  attempts.clear(key);
 }

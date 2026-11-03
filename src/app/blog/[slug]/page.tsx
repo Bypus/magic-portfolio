@@ -45,6 +45,9 @@ export async function generateMetadata({
   let post = posts.find((post) => post.slug === slugPath);
 
   if (!post) return {};
+  if (!(await canViewPath(`${blog.path}/${post.slug}`))) {
+    return { title: "Protected page", robots: { index: false, follow: false } };
+  }
 
   const metadata = Meta.generate({
     title: post.metadata.title,
