@@ -1,5 +1,6 @@
 import { getPosts } from "@/utils/utils";
-import { baseURL, routes as routesConfig } from "@/resources";
+import { baseURL, routes as routesConfig, protectedRoutes } from "@/resources";
+import { isProtectedPath } from "@/utils/pageAccess";
 
 export default async function sitemap() {
   const blogs = getPosts(["src", "app", "blog", "posts"]).map((post) => ({
@@ -21,5 +22,7 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes, ...blogs, ...works];
+  return [...routes, ...blogs, ...works].filter(
+    (entry) => !isProtectedPath(new URL(entry.url).pathname, protectedRoutes),
+  );
 }

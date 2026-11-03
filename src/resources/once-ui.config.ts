@@ -3,7 +3,7 @@ import {
   DisplayConfig,
   EffectsConfig,
   FontsConfig,
-  MailchimpConfig,
+  NewsletterFormConfig,
   ProtectedRoutesConfig,
   RoutesConfig,
   SameAsConfig,
@@ -11,10 +11,10 @@ import {
   SocialSharingConfig,
   StyleConfig,
 } from "@/types";
-import { home } from "./index";
+import { home, person, social } from "./content";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL: string = "https://demo.magic-portfolio.com";
+const baseURL: string = "https://www.jorisstocker.ovh";
 
 const routes: RoutesConfig = {
   "/": true,
@@ -81,7 +81,7 @@ const style: StyleConfig = {
   accent: "yellow", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
   solid: "color", // color | contrast
   solidStyle: "flat", // flat | plastic
-  border: "playful", // rounded | playful | conservative
+  border: "playful", // rounded | playful | conservative | sharp
   surface: "translucent", // filled | translucent
   transition: "all", // all | micro | macro
   scaling: "100", // 90 | 95 | 100 | 105 | 110
@@ -142,8 +142,11 @@ const effects: EffectsConfig = {
   },
 };
 
-const mailchimp: MailchimpConfig = {
-  action: "https://url/subscribe/post?parameters",
+// Newsletter signups go straight into your Aveiro audience (https://www.aveiro.app),
+// where you can write and send the newsletter too. In Aveiro, open Audience → Embed,
+// create a form, add this site's domain to its allowed sites and paste the form's public ID here.
+const newsletterForm: NewsletterFormConfig = {
+  aveiroEmbedId: "",
   effects: {
     mask: {
       cursor: true,
@@ -186,20 +189,20 @@ const mailchimp: MailchimpConfig = {
   },
 };
 
-// default schema data
+// default schema data — pulls from content.tsx so there's one source of truth
 const schema: SchemaConfig = {
   logo: "",
-  type: "Organization",
-  name: "Once UI",
+  type: "Person",
+  name: person.name,
   description: home.description,
-  email: "lorant@once-ui.com",
+  email: person.email,
 };
 
-// social links
+// social links — derived from the social array in content.tsx to avoid duplication
 const sameAs: SameAsConfig = {
-  threads: "https://www.threads.com/@once_ui",
-  linkedin: "https://www.linkedin.com/company/once-ui/",
-  discord: "https://discord.com/invite/5EyAQ4eNdS",
+  threads: social.find((s) => s.name === "Threads")?.link ?? "",
+  linkedin: social.find((s) => s.name === "LinkedIn")?.link ?? "",
+  discord: social.find((s) => s.name === "Discord")?.link ?? "",
 };
 
 // social sharing configuration for blog posts
@@ -220,7 +223,7 @@ const socialSharing: SocialSharingConfig = {
 
 export {
   display,
-  mailchimp,
+  newsletterForm,
   routes,
   protectedRoutes,
   baseURL,

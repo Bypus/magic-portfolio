@@ -3,6 +3,8 @@ import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import type React from "react";
 import type { ReactNode } from "react";
 import { slugify as transliterate } from "transliteration";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 import type { TextProps, MediaProps } from "@once-ui-system/core";
 import {
@@ -10,7 +12,6 @@ import {
   HeadingLink,
   Text,
   InlineCode,
-  CodeBlock,
   Accordion,
   AccordionGroup,
   Table,
@@ -27,6 +28,7 @@ import {
   ListItem,
   Line,
 } from "@once-ui-system/core";
+import { CodeBlock } from "@once-ui-system/core/code";
 
 type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
@@ -210,5 +212,19 @@ type CustomMDXProps = MDXRemoteProps & {
 };
 
 export function CustomMDX(props: CustomMDXProps) {
-  return <MDXRemote {...props} components={{ ...components, ...(props.components || {}) }} />;
+  return (
+    <MDXRemote
+      options={{
+        blockJS: false,
+        // Math between $$ and $$ (inline or on its own lines), rendered with KaTeX
+        // at build time. Single dollars stay plain text, so prices are safe.
+        mdxOptions: {
+          remarkPlugins: [[remarkMath, { singleDollarTextMath: false }]],
+          rehypePlugins: [rehypeKatex],
+        },
+      }}
+      {...props}
+      components={{ ...components, ...(props.components || {}) }}
+    />
+  );
 }

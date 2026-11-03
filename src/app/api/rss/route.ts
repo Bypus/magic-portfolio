@@ -1,9 +1,14 @@
 import { getPosts } from "@/utils/utils";
-import { baseURL, blog, person } from "@/resources";
+import { baseURL, blog, person, protectedRoutes } from "@/resources";
+import { isProtectedPath } from "@/utils/pageAccess";
 import { NextResponse } from "next/server";
 
+// Built once with the site, like the posts it lists.
+export const dynamic = "force-static";
+
 export async function GET() {
-  const posts = getPosts(["src", "app", "blog", "posts"]);
+  const posts = getPosts(["src", "app", "blog", "posts"])
+    .filter((post) => !isProtectedPath(`/blog/${post.slug}`, protectedRoutes));
 
   // Sort posts by date (newest first)
   const sortedPosts = posts.sort((a, b) => {
@@ -17,7 +22,7 @@ export async function GET() {
     <title>${blog.title}</title>
     <link>${baseURL}/blog</link>
     <description>${blog.description}</description>
-    <language>en</language>
+    <language>${person.locale ?? "en"}</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseURL}/api/rss" rel="self" type="application/rss+xml" />
     <managingEditor>${person.email || "noreply@example.com"} (${person.name})</managingEditor>

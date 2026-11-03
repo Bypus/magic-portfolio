@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
+import "katex/dist/katex.min.css";
 import { getPosts, extractHeadings } from "@/utils/utils";
+import { canViewPath } from "@/utils/pageAccessServer";
 import {
   Meta,
   Schema,
@@ -43,14 +45,19 @@ export async function generateMetadata({
   const post = posts.find((post) => post.slug === slugPath);
 
   if (!post) return {};
+  if (!(await canViewPath(`${work.path}/${post.slug}`))) {
+    return { title: "Protected page", robots: { index: false, follow: false } };
+  }
 
-  return Meta.generate({
+  const metadata = Meta.generate({
     title: post.metadata.title,
     description: post.metadata.summary,
     baseURL: baseURL,
     image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
     path: `${work.path}/${post.slug}`,
   });
+  // Meta.generate writes a canonical only alongside language alternates.
+  return { ...metadata, alternates: { canonical: metadata.openGraph.url } };
 }
 
 export default async function Project({
@@ -69,9 +76,15 @@ export default async function Project({
     notFound();
   }
 
+  // Password-protected: render nothing without access (RouteGuard shows the form).
+  if (!(await canViewPath(`${work.path}/${post.slug}`))) {
+    return null;
+  }
+
   const avatars =
     post.metadata.team?.map((person) => ({
       src: person.avatar,
+      "aria-label": person.name,
     })) || [];
 
   const headings = extractHeadings(post.content);

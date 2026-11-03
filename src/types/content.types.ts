@@ -32,6 +32,12 @@ export type Person = {
     category: string;
     items: Array<{ name: string; icon: string }>;
   }>;
+  /**
+   * BCP 47 language tag for the HTML lang attribute (e.g., 'en', 'ja', 'zh-TW').
+   * Defaults to 'en' if not set.
+   * See: https://www.iana.org/assignments/language-subtag-registry
+   */
+  locale?: string;
 };
 
 /**
@@ -158,7 +164,7 @@ export interface About extends BasePageConfig {
             /** Skill tags */
       tags?: Array<{
         name: string;
-        icon?: string;
+        icon?: IconName;
       }>;
       /** Achievements at the company */
       achievements: React.ReactNode[];
@@ -204,7 +210,7 @@ export interface About extends BasePageConfig {
       /** Skill tags */
       tags?: Array<{
         name: string;
-        icon?: string;
+        icon?: IconName;
       }>;
       /** Images related to the skill */
       images?: Array<{

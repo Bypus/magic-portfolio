@@ -1,50 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { isSafeUrl } from '@/utils/urlSafety';
+import { createOgProxyRoute } from "@once-ui-system/core/next";
+import { guardApiRequest } from "@/utils/apiSecurity";
+import { RateLimiter } from "@/utils/rateLimit";
 
-export async function GET(request: NextRequest) {
-  try {
-    // Get the URL parameter
-    const url = new URL(request.url);
-    const imageUrl = url.searchParams.get('url');
-    
-    if (!imageUrl) {
-      return NextResponse.json({ error: 'Missing URL parameter' }, { status: 400 });
-    }
+// Core's handler only fetches public addresses (every redirect is checked),
+// passes raster image types only, caps the size, and sends nosniff plus a
+// sandbox CSP. sameOrigin keeps it from being an open proxy for other sites.
+const handler = createOgProxyRoute({ sameOrigin: true, timeout: 5000, maxBytes: 5 * 1024 * 1024 });
+const limiter = new RateLimiter(60, 60_000);
 
-    if (!isSafeUrl(imageUrl)) {
-      return NextResponse.json({ error: 'URL not allowed' }, { status: 403 });
-    }
-    
-    // Fetch the image
-    const response = await fetch(imageUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; ImageProxy/1.0)',
-      },
-    });
-    
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: `Failed to fetch image: ${response.status}` },
-        { status: response.status }
-      );
-    }
-    
-    // Get the image data
-    const contentType = response.headers.get('content-type') || 'image/jpeg';
-    const imageData = await response.arrayBuffer();
-    
-    // Return the image with appropriate headers
-    return new NextResponse(imageData, {
-      headers: {
-        'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=86400',
-      },
-    });
-  } catch (error) {
-    console.error('Error proxying image:', error);
-    return NextResponse.json(
-      { error: 'Failed to proxy image' },
-      { status: 500 }
-    );
-  }
+export async function GET(request: Request) {
+  return guardApiRequest(request, limiter) ?? handler.GET(request);
 }

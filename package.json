@@ -7,35 +7,51 @@
     "build": "next build",
     "biome-write": "npx @biomejs/biome format --write .",
     "start": "next start",
-    "lint": "next lint"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.*"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
-    "@next/mdx": "^16.0.10",
-    "@once-ui-system/core": "^1.5.6",
+    "@next/mdx": "^16.4.5",
+    "@once-ui-system/core": "^2.1.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "classnames": "^2.5.1",
     "cookie": "^1.0.2",
     "gray-matter": "^4.0.3",
+    "katex": "^0.19.1",
     "lint-staged": "^16.1.5",
-    "next": "^16.0.10",
+    "next": "^16.4.5",
     "next-mdx-remote": "^6.0.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "prismjs": "^1.30.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "sass": "^1.86.3",
+    "three": "0.182.0",
     "transliteration": "^2.3.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/cookie": "^0.6.0",
     "@types/node": "^20.17.30",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.5",
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.3",
     "baseline-browser-mapping": "^2.9.19",
-    "eslint": "^9.25.0",
     "typescript": "^5.8.3",
     "tzdata": "^1.0.44"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "overrides": {
+    "rehype-katex": {
+      "katex": "$katex"
+    },
+    "micromark-extension-math": {
+      "katex": "$katex"
+    }
   }
 }
